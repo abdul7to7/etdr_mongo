@@ -24,8 +24,8 @@ exports.userSignUp = async (req, res, next) => {
     // Create user
     const user = await User.create({ username, mail, password: hashed });
     if (user) {
-      const token = generateToken({
-        _id: user._id,
+      const token = await generateToken({
+        id: user.id,
         username: user.username,
         isPremium: user.isPremium,
       });
@@ -64,8 +64,8 @@ exports.login = async (req, res, next) => {
         .json({ success: false, message: "Password not matched" });
     }
 
-    const token = generateToken({
-      _id: user._id,
+    const token = await generateToken({
+      id: user.id,
       username: user.username,
       isPremium: user.isPremium,
     });

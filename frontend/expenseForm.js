@@ -83,6 +83,7 @@ document.getElementById("expenseForm").addEventListener("submit", async (e) => {
   const category = document.getElementById("expenseCat").value;
   let response = await postExpense({ amount, description, category });
   if (response) {
+    console.log(response);
     addExpenseToUI(response.expense, "recent");
     if (lastPage) addExpenseToUI(response.expense);
   }

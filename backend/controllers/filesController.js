@@ -21,7 +21,7 @@ const generateFileHash = (content) => {
 exports.downloadReport = async (req, res) => {
   try {
     // Fetching the expenses for the user
-    let data = await Expense.find({ userId: req.user._id });
+    let data = await Expense.find({ userId: req.user.id });
 
     // Stringify the data to store it as a JSON file in S3
     data = JSON.stringify(data);

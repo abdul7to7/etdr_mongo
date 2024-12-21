@@ -5,7 +5,7 @@ const User = require("../models/User"); // Mongoose model
 // Get all expenses for the user
 exports.getAllExpenses = async (req, res, next) => {
   try {
-    const expenses = await Expense.find({ userId: req.user._id });
+    const expenses = await Expense.find({ userId: req.user.id });
     return res.status(200).json({
       success: true,
       expenses: expenses,
@@ -28,12 +28,12 @@ exports.getAllExpensesByPage = async (req, res, next) => {
   try {
     let page = Number(req.query.page) || 1;
     let size = Number(req.query.size) || 10;
-    const expenses = await Expense.find({ userId: req.user._id })
+    const expenses = await Expense.find({ userId: req.user.id })
       .skip((page - 1) * size)
       .limit(size);
 
     const totalExpenses = await Expense.countDocuments({
-      userId: req.user._id,
+      userId: req.user.id,
     });
 
     return res.status(200).json({
@@ -59,19 +59,20 @@ exports.addExpense = async (req, res, next) => {
   const session = await mongoose.startSession();
   try {
     session.startTransaction();
+    console.log(req.user);
 
     const expense = new Expense({
       amount: req.body.amount,
       description: req.body.description,
       category: req.body.category,
-      userId: req.user._id,
+      userId: req.user.id,
     });
 
     await expense.save({ session });
 
     // Update the user's total expense
     await User.updateOne(
-      { _id: req.user._id },
+      { _id: req.user.id },
       { $inc: { totalExpense: req.body.amount } },
       { session }
     );
@@ -109,13 +110,13 @@ exports.deleteExpense = async (req, res, next) => {
     }
 
     await Expense.deleteOne(
-      { _id: req.params.expense_id, userId: req.user._id },
+      { _id: req.params.expense_id, userId: req.user.id },
       { session }
     );
 
     // Decrease the user's total expense
     await User.updateOne(
-      { _id: req.user._id },
+      { _id: req.user.id },
       { $inc: { totalExpense: -expense.amount } },
       { session }
     );

@@ -23,7 +23,7 @@ exports.buyMemberShip = (req, res, next) => {
 
       try {
         const order = new Order({
-          userId: req.user._id,
+          userId: req.user.id,
           rzpOrderId: rzpOrder.id,
           status: "PENDING",
         });
@@ -68,14 +68,14 @@ exports.verifyPurchase = async (req, res, next) => {
     );
 
     const user = await User.findOneAndUpdate(
-      { _id: req.user._id },
+      { _id: req.user.id },
       { isPremium: userStatus },
       { new: true }
     );
 
     if (generatedSignature === signature) {
       const token = generateToken({
-        id: req.user._id,
+        id: req.user.id,
         username: req.user.username,
         isPremium: userIsPremium,
       });
