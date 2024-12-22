@@ -1,4 +1,4 @@
-const server = "http://localhost:4000";
+const server = "https://etdr-mongo-backend.onrender.com";
 
 document.getElementById("loginForm")?.addEventListener("submit", (e) => {
   e.preventDefault();

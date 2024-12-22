@@ -1,4 +1,4 @@
-const server = "http://localhost:4000";
+const server = "https://etdr-mongo-backend.onrender.com";
 
 let currentPage = 1;
 let lastPage = false;

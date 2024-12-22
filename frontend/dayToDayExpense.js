@@ -1,4 +1,4 @@
-const server = "http://localhost:4000";
+const server = "https://etdr-mongo-backend.onrender.com";
 
 document.addEventListener("DOMContentLoaded", async (e) => {
   document.getElementById("currentYear").textContent = new Date().getFullYear();
