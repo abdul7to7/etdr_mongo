@@ -24,7 +24,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   currentPageEl.textContent = currentPage;
   if (currentPage == 1) prevBtn.disabled = true;
   else prevBtn.disabled = false;
-  if (data.lastPage) nextBtn.disabled = true;
+  if (data?.lastPage) nextBtn.disabled = true;
   else nextBtn.disabled = false;
   lastPage = data.lastPage;
 
@@ -75,15 +75,39 @@ document.getElementById("rowSizeSelect").addEventListener("change", (e) => {
   window.location.reload();
 });
 
+// Select all radio buttons with name="transactionType"
+document
+  .querySelectorAll('input[name="transactionType"]')
+  .forEach((radioButton) => {
+    radioButton.addEventListener("click", (e) => {
+      if (e.target.value == "income") {
+        document.getElementById("expenseCat").style.display = "none";
+        document.getElementById("expenseCat").removeAttribute("required");
+      } else {
+        document.getElementById("expenseCat").style.display = "block";
+        document.getElementById("expenseCat").setAttribute("required", true);
+      }
+    });
+  });
+
 //adding an expense
 document.getElementById("expenseForm").addEventListener("submit", async (e) => {
   e.preventDefault();
-  const amount = document.getElementById("expenseAmount").value;
+  const transactionType = document.querySelector(
+    'input[name="transactionType"]:checked'
+  ).value;
+  let amount = document.getElementById("expenseAmount").value;
   const description = document.getElementById("expenseDesc").value;
-  const category = document.getElementById("expenseCat").value;
+  let category;
+  if (transactionType == "income") {
+    category = "income";
+  } else {
+    amount *= -1;
+    category = document.getElementById("expenseCat").value;
+  }
+
   let response = await postExpense({ amount, description, category });
   if (response) {
-    console.log(response);
     addExpenseToUI(response.expense, "recent");
     if (lastPage) addExpenseToUI(response.expense);
   }
@@ -95,6 +119,13 @@ document.getElementById("expense-list").addEventListener("click", async (e) => {
   expense_id = e.target.getAttribute("expense_id");
   let response;
   if (expense_id) {
+    const isConfirmed = confirm(
+      "Are you sure you want to submit this expense?"
+    );
+    if (!isConfirmed) {
+      e.preventDefault();
+      return;
+    }
     response = await deleteExpense(expense_id);
   }
   if (response) {
@@ -326,11 +357,22 @@ function premiumUser(isPremium) {
 }
 
 async function getLeaderboard() {
-  let data = await fetch(`${server}/expense_features/leaderboard`, {
-    headers: {
-      token: localStorage.getItem("token"),
-    },
-  });
-  data = await data.json();
-  return data;
+  try {
+    let data = await fetch(`${server}/expense_features/leaderboard`, {
+      headers: {
+        token: localStorage.getItem("token"),
+      },
+    });
+    data = await data.json();
+    return data;
+  } catch (e) {
+    console.log(e);
+    return;
+  }
 }
+
+document.getElementById("logout-btn").addEventListener("click", () => {
+  localStorage.clear();
+
+  window.location.href = "./index.html";
+});

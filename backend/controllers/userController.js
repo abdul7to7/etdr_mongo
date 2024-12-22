@@ -49,7 +49,9 @@ exports.userSignUp = async (req, res, next) => {
 exports.login = async (req, res, next) => {
   try {
     const { mail, password } = req.body;
-    const user = await User.findOne({ where: { mail } });
+
+    console.log(req.body);
+    const user = await User.findOne({ mail });
 
     if (!user) {
       return res

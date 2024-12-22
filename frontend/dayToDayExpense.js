@@ -13,18 +13,38 @@ document.addEventListener("DOMContentLoaded", async (e) => {
       addExpenseToUI(expense);
       total += expense.amount;
       let createdDate = new Date(expense.createdAt);
-      if (createdDate.getFullYear() == currentDate.getFullYear()) {
-        monthlyExpense[createdDate.getMonth()] += expense.amount;
-      }
-      if (yearlyExpense[createdDate.getFullYear()]) {
-        yearlyExpense[createdDate.getFullYear()] += expense.amount;
+
+      if (expense.amount < 0) {
+        if (createdDate.getFullYear() == currentDate.getFullYear()) {
+          if (monthlyExpense[createdDate.getMonth()]) {
+            monthlyExpense[createdDate.getMonth()][1] += expense.amount;
+          } else {
+            monthlyExpense[createdDate.getMonth()] = [0, expense.amount];
+          }
+        }
+        if (yearlyExpense[createdDate.getFullYear()]) {
+          yearlyExpense[createdDate.getFullYear()][1] += expense.amount;
+        } else {
+          yearlyExpense[createdDate.getFullYear()] = [0, expense.amount];
+        }
       } else {
-        yearlyExpense[createdDate.getFullYear()] = expense.amount;
+        if (createdDate.getFullYear() == currentDate.getFullYear()) {
+          if (monthlyExpense[createdDate.getMonth()]) {
+            monthlyExpense[createdDate.getMonth()][0] += expense.amount;
+          } else {
+            monthlyExpense[createdDate.getMonth()] = [expense.amount, 0];
+          }
+        }
+        if (yearlyExpense[createdDate.getFullYear()]) {
+          yearlyExpense[createdDate.getFullYear()][0] += expense.amount;
+        } else {
+          yearlyExpense[createdDate.getFullYear()] = [expense.amount, 0];
+        }
       }
     });
     const newRow = table.insertRow(-1);
     const newCell = newRow.insertCell(0);
-    newCell.textContent = `Total Expenses = ${total}`;
+    newCell.textContent = `Balance = ${total}`;
     newCell.colSpan = table.rows[0].cells.length;
     newCell.classList.add("numbers");
     newRow.style.backgroundColor = "lightblue";
@@ -105,9 +125,9 @@ function addTomonthlyTableUI(monthlyExpense) {
       } else if (month == 11) {
         td1.textContent = "December";
       }
-      td2.textContent = 60000;
-      td3.textContent = amount;
-      td4.textContent = 60000 - amount;
+      td2.textContent = amount[0];
+      td3.textContent = amount[1];
+      td4.textContent = amount[0] + amount[1];
 
       td2.classList.add("numbers");
       td3.classList.add("numbers");
@@ -131,9 +151,9 @@ function addToYearlyTableUI(yearlyExpense) {
     let td3 = document.createElement("td");
     let td4 = document.createElement("td");
     td1.textContent = year;
-    td2.textContent = 12 * 60000;
-    td3.textContent = yearlyExpense[year];
-    td4.textContent = 12 * 60000 - yearlyExpense[year];
+    td2.textContent = yearlyExpense[year][0];
+    td3.textContent = yearlyExpense[year][1];
+    td4.textContent = yearlyExpense[year][0] + yearlyExpense[year][1];
 
     td2.classList.add("numbers");
     td3.classList.add("numbers");

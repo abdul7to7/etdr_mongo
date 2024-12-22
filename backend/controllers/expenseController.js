@@ -71,11 +71,13 @@ exports.addExpense = async (req, res, next) => {
     await expense.save({ session });
 
     // Update the user's total expense
-    await User.updateOne(
-      { _id: req.user.id },
-      { $inc: { totalExpense: req.body.amount } },
-      { session }
-    );
+    if (req.body.amount < 0) {
+      await User.updateOne(
+        { _id: req.user.id },
+        { $inc: { totalExpense: req.body.amount * -1 } },
+        { session }
+      );
+    }
 
     await session.commitTransaction();
     session.endSession();
@@ -115,11 +117,13 @@ exports.deleteExpense = async (req, res, next) => {
     );
 
     // Decrease the user's total expense
-    await User.updateOne(
-      { _id: req.user.id },
-      { $inc: { totalExpense: -expense.amount } },
-      { session }
-    );
+    if (expense.amount < 0) {
+      await User.updateOne(
+        { _id: req.user.id },
+        { $inc: { totalExpense: expense.amount } },
+        { session }
+      );
+    }
 
     await session.commitTransaction();
     session.endSession();
@@ -144,7 +148,7 @@ exports.getLeaderboard = async (req, res, next) => {
   try {
     const usersWithExpenses = await User.find()
       .select("username totalExpense")
-      .sort({ totalExpense: -1 });
+      .sort({ totalExpense: 1 });
 
     return res.status(200).json({
       usersWithExpenses: usersWithExpenses,

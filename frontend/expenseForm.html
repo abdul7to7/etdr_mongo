@@ -11,6 +11,22 @@
       <div class="formContainer">
         <h2 class="blockHeading">Add Expense</h2>
         <form id="expenseForm">
+          <div class="toggle-box">
+            <label class="toggle-option">
+              <input
+                type="radio"
+                name="transactionType"
+                value="expense"
+                checked
+              />
+              <span>Expense</span>
+            </label>
+            <label class="toggle-option">
+              <input type="radio" name="transactionType" value="income" />
+              <span>Income</span>
+            </label>
+          </div>
+
           <div class="expenseFormItem flexSpaceBetween">
             <input
               type="number"
@@ -92,6 +108,7 @@
           <ul id="leaderboard-list"></ul>
         </div>
         <button id="buy-premium-btn" class="btn">Buy Premium</button>
+        <button class="btn" id="logout-btn">Logout</button>
       </div>
     </div>
     <script src="./expenseForm.js"></script>

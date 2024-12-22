@@ -177,3 +177,64 @@ button:disabled {
     padding: 5px;
     margin: 10px;
 }
+
+/* Container Box */
+.toggle-box {
+    display: flex;
+    width: 100%;
+    /* Full width */
+    height: 30px;
+    /* Adjust height as needed */
+    border: 2px solid #ccc;
+    border-radius: 12px;
+    /* Rounded corners */
+    overflow: hidden;
+    /* Prevent overflow */
+    background-color: #f9f9f9;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    /* Subtle shadow */
+    margin-bottom: 10px;
+}
+
+/* Label Styling */
+.toggle-option {
+    flex: 1;
+    /* Equal space for both options */
+    text-align: center;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 18px;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    color: #666;
+    /* Default text color */
+    background-color: #f9f9f9;
+    /* Default background color */
+}
+
+/* Hidden Radio Button */
+input[type="radio"] {
+    display: none;
+}
+
+/* Highlight Selected Option */
+input[type="radio"]:checked+span {
+    background-color: #4caf50;
+    /* Highlight green for selected */
+    color: white;
+    box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Expense Option Highlight (optional if different color) */
+input[type="radio"]:checked[value="expense"]+span {
+    background-color: #f44336;
+    /* Red for Expense */
+}
+
+/* Hover Effect */
+.toggle-option:hover span {
+    background-color: #e0e0e0;
+    /* Light gray on hover */
+}
