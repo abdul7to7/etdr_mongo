@@ -98,7 +98,7 @@ exports.forgotPassword = async (req, res, next) => {
   };
 
   try {
-    const user = await User.findOne({ where: { mail } });
+    const user = await User.findOne({ mail });
     if (user) {
       await ForgotPassword.create({ id: uuid, userId: user.id });
       await apiInstance.sendTransacEmail(sendSmtpEmail);
