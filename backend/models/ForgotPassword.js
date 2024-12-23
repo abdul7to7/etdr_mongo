@@ -1,16 +1,15 @@
 const mongoose = require("mongoose");
 
-// Define the ForgotPassword schema
 const forgotPasswordSchema = new mongoose.Schema(
   {
     id: {
-      type: String, // Use String for the ID field
-      required: true, // Make it a required field
-      unique: true, // Make the ID unique (equivalent to primaryKey in Sequelize)
+      type: String,
+      required: true,
+      unique: true,
     },
     isActive: {
-      type: Boolean, // Use Boolean for isActive field
-      default: true, // Set the default value to true
+      type: Boolean,
+      default: true,
     },
     userId: {
       type: mongoose.Schema.Types.ObjectId,
@@ -19,11 +18,10 @@ const forgotPasswordSchema = new mongoose.Schema(
     },
   },
   {
-    timestamps: true, // Automatically add `createdAt` and `updatedAt` fields
+    timestamps: true,
   }
 );
 
-// Create the ForgotPassword model
 const ForgotPassword = mongoose.model("ForgotPassword", forgotPasswordSchema);
 
 module.exports = ForgotPassword;

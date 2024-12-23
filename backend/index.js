@@ -44,15 +44,6 @@ app.use("/", (req, res) => {
   res.status(404).send("Page not found");
 });
 
-// User.hasMany(Expense);
-// Expense.belongsTo(User);
-
-// User.hasMany(Order);
-// Order.belongsTo(User);
-
-// User.hasMany(ForgotPassword);
-// ForgotPassword.belongsTo(User);
-
 (async () => {
   const PORT = process.env.PORT || 3000;
   const MONGO_URI = process.env.URI;

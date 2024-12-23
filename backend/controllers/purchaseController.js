@@ -1,7 +1,7 @@
 const razorPay = require("razorpay");
 const crypto = require("crypto");
-const Order = require("../models/Order"); // Assuming Order model is now Mongoose-based
-const User = require("../models/User"); // Assuming User model is now Mongoose-based
+const Order = require("../models/Order");
+const User = require("../models/User");
 const generateToken = require("../middleware/authGenerate");
 
 exports.buyMemberShip = (req, res, next) => {
@@ -11,7 +11,7 @@ exports.buyMemberShip = (req, res, next) => {
       key_secret: process.env.RZP_KEY_SECRET,
     });
 
-    const amount = 2500; // Amount in paise (i.e., 2500 paise = ₹25)
+    const amount = 2500;
 
     rzp.orders.create({ amount, currency: "INR" }, async (err, rzpOrder) => {
       if (err) {

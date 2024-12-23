@@ -1,38 +1,36 @@
 const mongoose = require("mongoose");
 
-// Define the User schema
 const userSchema = new mongoose.Schema(
   {
     username: {
-      type: String, // Use String for username
-      required: true, // Make it a required field
+      type: String,
+      required: true,
     },
     mail: {
-      type: String, // Use String for mail
-      required: true, // Make it a required field
-      unique: true, // Ensure mail is unique
+      type: String,
+      required: true,
+      unique: true,
     },
     password: {
-      type: String, // Use String for password
-      required: true, // Make it a required field
+      type: String,
+      required: true,
     },
     isPremium: {
-      type: Boolean, // Use Boolean for isPremium
-      required: true, // Make it a required field
-      default: false, // Default value is false
+      type: Boolean,
+      required: true,
+      default: false,
     },
     totalExpense: {
-      type: Number, // Use Number for totalExpense (equivalent to Sequelize.DOUBLE)
-      required: true, // Make it a required field
-      default: 0, // Default value is 0
+      type: Number,
+      required: true,
+      default: 0,
     },
   },
   {
-    timestamps: true, // Automatically adds `createdAt` and `updatedAt` fields
+    timestamps: true,
   }
 );
 
-// Create the User model
 const User = mongoose.model("User", userSchema);
 
 module.exports = User;

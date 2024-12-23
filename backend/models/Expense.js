@@ -1,19 +1,18 @@
 const mongoose = require("mongoose");
 
-// Define the Expense schema
 const expenseSchema = new mongoose.Schema(
   {
     amount: {
-      type: Number, // Use Number for amount instead of Sequelize.DOUBLE
-      required: true, // Make it a required field
+      type: Number,
+      required: true,
     },
     description: {
-      type: String, // Use String for description
-      required: true, // Make it a required field
+      type: String,
+      required: true,
     },
     category: {
-      type: String, // Use String for category
-      required: true, // Make it a required field
+      type: String,
+      required: true,
     },
     userId: {
       type: mongoose.Schema.Types.ObjectId,
@@ -22,11 +21,10 @@ const expenseSchema = new mongoose.Schema(
     },
   },
   {
-    timestamps: true, // Automatically add `createdAt` and `updatedAt` fields
+    timestamps: true,
   }
 );
 
-// Create the Expense model
 const Expense = mongoose.model("Expense", expenseSchema);
 
 module.exports = Expense;

@@ -1,8 +1,7 @@
 const { mongoose } = require("mongoose");
-const Expense = require("../models/Expense"); // Mongoose model
-const User = require("../models/User"); // Mongoose model
+const Expense = require("../models/Expense");
+const User = require("../models/User");
 
-// Get all expenses for the user
 exports.getAllExpenses = async (req, res, next) => {
   try {
     const expenses = await Expense.find({ userId: req.user.id });
@@ -23,7 +22,6 @@ exports.getAllExpenses = async (req, res, next) => {
   }
 };
 
-// Get expenses by page
 exports.getAllExpensesByPage = async (req, res, next) => {
   try {
     let page = Number(req.query.page) || 1;
@@ -54,12 +52,10 @@ exports.getAllExpensesByPage = async (req, res, next) => {
   }
 };
 
-// Add a new expense
 exports.addExpense = async (req, res, next) => {
   const session = await mongoose.startSession();
   try {
     session.startTransaction();
-    console.log(req.user);
 
     const expense = new Expense({
       amount: req.body.amount,
@@ -70,7 +66,6 @@ exports.addExpense = async (req, res, next) => {
 
     await expense.save({ session });
 
-    // Update the user's total expense
     if (req.body.amount < 0) {
       await User.updateOne(
         { _id: req.user.id },
@@ -98,7 +93,6 @@ exports.addExpense = async (req, res, next) => {
   }
 };
 
-// Delete an expense
 exports.deleteExpense = async (req, res, next) => {
   const session = await mongoose.startSession();
   try {
@@ -143,7 +137,6 @@ exports.deleteExpense = async (req, res, next) => {
   }
 };
 
-// Get the leaderboard (Users with the highest total expense)
 exports.getLeaderboard = async (req, res, next) => {
   try {
     const usersWithExpenses = await User.find()
