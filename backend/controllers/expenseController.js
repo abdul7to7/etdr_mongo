@@ -141,7 +141,7 @@ exports.getLeaderboard = async (req, res, next) => {
   try {
     const usersWithExpenses = await User.find()
       .select("username totalExpense")
-      .sort({ totalExpense: 1 });
+      .sort({ totalExpense: -1 });
 
     return res.status(200).json({
       usersWithExpenses: usersWithExpenses,
