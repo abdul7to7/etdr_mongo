@@ -203,30 +203,31 @@ document
     document.location = "./dayToDayExpense.html";
   });
 
-// document
-//   .getElementById("downloadReport")
-//   .addEventListener("click", async (e) => {
-//     e.preventDefault();
-//     let response = await fetch(`${server}/files/download/report`, {
-//       headers: {
-//         "Content-Type": "application/json",
-//         token: localStorage.getItem("token"),
-//       },
-//     });
-//     const data = await response.json();
-//     const url = data.url;
+document
+  .getElementById("downloadReport")
+  .addEventListener("click", async (e) => {
+    e.preventDefault();
+    console.alert("Aws files are not accessible, authetication error");
+    // let response = await fetch(`${server}/files/download/report`, {
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //     token: localStorage.getItem("token"),
+    //   },
+    // });
+    // const data = await response.json();
+    // const url = data.url;
 
-//     const downloadResponse = await fetch(url);
-//     const blob = await downloadResponse.blob();
-//     const link = document.createElement("a");
-//     link.href = URL.createObjectURL(blob);
-//     let filename = data.url
-//       .split("amazonaws.com/")[1]
-//       .split("?AWSAccessKeyId")[0];
-//     link.download = filename;
+    // const downloadResponse = await fetch(url);
+    // const blob = await downloadResponse.blob();
+    // const link = document.createElement("a");
+    // link.href = URL.createObjectURL(blob);
+    // let filename = data.url
+    //   .split("amazonaws.com/")[1]
+    //   .split("?AWSAccessKeyId")[0];
+    // link.download = filename;
 
-//     link.click();
-//   });
+    // link.click();
+  });
 
 function addExpenseToUI(expense, recent) {
   let toAdd = recent ? `recent-expense-list` : `expense-list`;
