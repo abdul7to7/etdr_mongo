@@ -207,7 +207,7 @@ document
   .getElementById("downloadReport")
   .addEventListener("click", async (e) => {
     e.preventDefault();
-    console.alert("Aws files are not accessible, authetication error");
+    alert("Aws files are not accessible, authetication error");
     // let response = await fetch(`${server}/files/download/report`, {
     //   headers: {
     //     "Content-Type": "application/json",
