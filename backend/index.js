@@ -21,7 +21,11 @@ const accessLogStream = fs.createWriteStream(
 );
 app.use(morgan("combined", { stream: accessLogStream }));
 
-app.use(cors());
+app.use(
+  cors({
+    origin: ["https://etdr-mongo-frontend.onrender.com"],
+  })
+);
 
 const userRoutes = require("./Routes/userRoutes");
 const expenseRoutes = require("./Routes/expenseRoutes");
