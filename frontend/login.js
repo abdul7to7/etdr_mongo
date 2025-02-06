@@ -5,8 +5,8 @@ document.getElementById("loginForm")?.addEventListener("submit", async (e) => {
   const mail = document.getElementById("loginMail").value;
   const password = document.getElementById("loginPassword").value;
   try {
-    document.getElementsByClassName("btn").forEach((btn) => {
-      btn.setAttribute("disable");
+    [...document.getElementsByClassName("btn")].forEach((btn) => {
+      btn.setAttribute("disabled", true);
     });
     const response = await axios.post(`${server}/user/login`, {
       mail: mail,
@@ -21,8 +21,8 @@ document.getElementById("loginForm")?.addEventListener("submit", async (e) => {
   } catch (e) {
     alert(`Something went wrong: ${e.message}`);
   }
-  document.getElementsByClassName("btn").forEach((btn) => {
-    btn.removeAttribute("disable");
+  [...document.getElementsByClassName("btn")].forEach((btn) => {
+    btn.removeAttribute("disabled");
   });
 });
 
