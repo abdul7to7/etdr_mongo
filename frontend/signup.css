@@ -98,3 +98,16 @@ p {
     width: 100%;
     height: 30px;
 }
+
+button:disabled {
+    color: black;
+    /* Change text color */
+    background-color: lightgray;
+    /* Set a custom background */
+    opacity: 1;
+    /* Override the default faded look */
+    cursor: not-allowed;
+    /* Keep the cursor style */
+    border: 1px solid black;
+    /* Define a custom border */
+}

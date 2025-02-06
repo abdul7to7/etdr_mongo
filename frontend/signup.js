@@ -1,6 +1,6 @@
 const server = "https://etdr-mongo-backend.onrender.com";
 
-document.getElementById("signUpForm")?.addEventListener("submit", (e) => {
+document.getElementById("signUpForm")?.addEventListener("submit", async (e) => {
   e.preventDefault();
   const username = document.getElementById("signUpUsername").value;
   const mail = document.getElementById("signUpMail").value;
