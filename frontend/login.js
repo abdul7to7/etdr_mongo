@@ -1,31 +1,29 @@
 const server = "https://etdr-mongo-backend.onrender.com";
 
-document.getElementById("loginForm")?.addEventListener("submit", (e) => {
+document.getElementById("loginForm")?.addEventListener("submit", async (e) => {
   e.preventDefault();
   const mail = document.getElementById("loginMail").value;
   const password = document.getElementById("loginPassword").value;
-
-  axios
-    .post(`${server}/user/login`, {
+  try {
+    document.getElementsByClassName("btn").forEach((btn) => {
+      btn.setAttribute("disable");
+    });
+    const response = await axios.post(`${server}/user/login`, {
       mail: mail,
       password: password,
-    })
-    // .then((response) => {
-    //   return response.json();
-    // })
-    .then((response) => {
-      if (response.data.success == false) {
-        // window.location.href = "./login.html";
-        // add msg to ui here
-        alert(response.data.message || "connection error");
-        return;
-      }
+    });
+    if (response && response.data && response.data.success) {
       localStorage.setItem("token", response.data.token);
       window.location.href = "./expenseForm.html";
-    })
-    .catch((e) => {
-      alert(e);
-    });
+    } else {
+      alert(`Something went wrong`);
+    }
+  } catch (e) {
+    alert(`Something went wrong: ${e.message}`);
+  }
+  document.getElementsByClassName("btn").forEach((btn) => {
+    btn.removeAttribute("disable");
+  });
 });
 
 document.getElementById("forgot-password").addEventListener("click", () => {
