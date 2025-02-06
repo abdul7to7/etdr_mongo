@@ -249,8 +249,9 @@ function addExpenseToUI(expense, recent) {
     document.getElementById("recentlyAddedHeading").style.display = "block";
   }
   const amountColor = expense.amount > 0 ? "green" : "red";
-  let amountTextNode = document.createTextNode(Math.abs(expense.amount));
-  amountTextNode.style.color = amountColor;
+  let amountSpan = document.createElement("span");
+  amountSpan.textContent = Math.abs(expense.amount);
+  amountSpan.style.color = amountColor;
   let descriptionTextNode = document.createTextNode(expense.description);
   let categoryTextNode = document.createTextNode(expense.category);
   let liNode = document.createElement("li");
@@ -260,7 +261,7 @@ function addExpenseToUI(expense, recent) {
   buttonNode.classList.add("btn", "delete-btn");
   buttonNode.setAttribute("expense_id", expense._id);
   buttonNode.appendChild(buttonText);
-  liNode.appendChild(amountTextNode);
+  liNode.appendChild(amountSpan);
   liNode.appendChild(document.createTextNode(" || "));
   liNode.appendChild(descriptionTextNode);
   liNode.appendChild(document.createTextNode(" || "));
