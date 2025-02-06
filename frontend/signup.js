@@ -5,6 +5,11 @@ document.getElementById("signUpForm")?.addEventListener("submit", async (e) => {
   const username = document.getElementById("signUpUsername").value;
   const mail = document.getElementById("signUpMail").value;
   const password = document.getElementById("signUpPassword").value;
+
+  [...document.getElementsByClassName("btn")].forEach((btn) => {
+    btn.setAttribute("disabled", true);
+  });
+
   fetch(`${server}/user/signup`, {
     method: "POST",
     headers: {
@@ -31,4 +36,8 @@ document.getElementById("signUpForm")?.addEventListener("submit", async (e) => {
     .catch((e) => {
       alert(e);
     });
+
+  [...document.getElementsByClassName("btn")].forEach((btn) => {
+    btn.removeAttribute("disabled");
+  });
 });

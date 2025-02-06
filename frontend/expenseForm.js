@@ -248,8 +248,9 @@ function addExpenseToUI(expense, recent) {
   if (recent) {
     document.getElementById("recentlyAddedHeading").style.display = "block";
   }
-
-  let amountTextNode = document.createTextNode(expense.amount);
+  const amountColor = expense.amount > 0 ? "green" : "red";
+  let amountTextNode = document.createTextNode(abs(expense.amount));
+  amountTextNode.style.color = amountColor;
   let descriptionTextNode = document.createTextNode(expense.description);
   let categoryTextNode = document.createTextNode(expense.category);
   let liNode = document.createElement("li");
