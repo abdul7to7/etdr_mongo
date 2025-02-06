@@ -250,10 +250,12 @@ function addExpenseToUI(expense, recent) {
   }
   const amountColor = expense.amount > 0 ? "green" : "red";
   let amountSpan = document.createElement("span");
+  let descriptionSpan = document.createElement("span");
+  let categorySpan = document.createElement("span");
   amountSpan.textContent = Math.abs(expense.amount);
   amountSpan.style.color = amountColor;
-  let descriptionTextNode = document.createTextNode(expense.description);
-  let categoryTextNode = document.createTextNode(expense.category);
+  descriptionSpan.textContent = expense.description;
+  categorySpan.textContent = expense.category;
   let liNode = document.createElement("li");
   liNode.classList.add("expense-item");
   let buttonText = document.createTextNode("Delete");
@@ -262,10 +264,10 @@ function addExpenseToUI(expense, recent) {
   buttonNode.setAttribute("expense_id", expense._id);
   buttonNode.appendChild(buttonText);
   liNode.appendChild(amountSpan);
-  liNode.appendChild(document.createTextNode(" || "));
-  liNode.appendChild(descriptionTextNode);
-  liNode.appendChild(document.createTextNode(" || "));
-  liNode.appendChild(categoryTextNode);
+  liNode.appendChild(document.createTextNode("\u00A0"));
+  liNode.appendChild(descriptionSpan);
+  liNode.appendChild(document.createTextNode("\u00A0"));
+  liNode.appendChild(categorySpan);
   liNode.appendChild(document.createTextNode(" "));
   if (!recent) liNode.appendChild(buttonNode);
 
