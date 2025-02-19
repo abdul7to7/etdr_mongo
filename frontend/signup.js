@@ -30,6 +30,7 @@ document.getElementById("signUpForm")?.addEventListener("submit", async (e) => {
         //send msg here
         return;
       }
+      alert("register successful");
       localStorage.setItem("token", response.token);
       window.location.href = "./expenseForm.html";
     })
