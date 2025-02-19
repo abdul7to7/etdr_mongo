@@ -180,8 +180,13 @@ document
   .getElementById("show-leaderboard-btn")
   ?.addEventListener("click", async () => {
     const leaderboardList = document.getElementById("leaderboard-list");
+    const prevLength = leaderboardList.childNodes.length;
     while (leaderboardList.firstChild) {
       leaderboardList.removeChild(leaderboardList.firstChild);
+    }
+    if (prevLength) {
+      leaderboardList.innerHTML = "";
+      return;
     }
     const heading = document.createElement("li");
     heading.innerHTML = "<h3>Most Expenses</h3>";
