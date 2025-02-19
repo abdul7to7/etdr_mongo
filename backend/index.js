@@ -23,7 +23,8 @@ app.use(morgan("combined", { stream: accessLogStream }));
 
 app.use(
   cors({
-    origin: ["https://etdr-mongo-frontend.onrender.com"],
+    // origin: ["https://etdr-mongo-frontend.onrender.com"],
+    origin: "*",
   })
 );
 
