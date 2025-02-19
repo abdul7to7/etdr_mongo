@@ -2,6 +2,12 @@
 
 Expense Tracker(backend focused) app where users can signup, login, add & remove expenses. It has Razorpay integrated as a payment method, allowing users to purchase a premium membership. get report, download report and the leaderboard are available as premium features.
 
+## Tech Stack
+
+**Client:** Vanilla HTML, CSS, and JavaScript
+
+**Server:** Node, Express
+
 ## API Reference
 
 | Methods | Endpoints                             | Description                                          |
