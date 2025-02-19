@@ -1,6 +1,6 @@
 # 🚀 Project Name – Expense Tracker
 
-Expense Tracker where users can sign up, log in, add, and remove expenses. It has Razorpay integrated as a payment method, allowing users to purchase a premium membership. Complete reports, report downloads, and the leaderboard are available as premium features.
+Expense Tracker(backend focused) app where users can signup, login, add & remove expenses. It has Razorpay integrated as a payment method, allowing users to purchase a premium membership. get report, download report and the leaderboard are available as premium features.
 
 ## API Reference
 
